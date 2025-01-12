@@ -8,10 +8,8 @@ const handler = async (req, res) => {
     const connection = await mysql.createConnection(dbConfig);
 
     const [product] = await connection.query(
-      `SELECT p.*,  f.* from produits p join produit_fournisseur pf ON pf.id_produit = p.id join fournisseurs f on f.id = pf.id_fournisseur where p.id = '${id}'`,
+      `SELECT f.* FROM Fournisseurs f JOIN Produit_Fournisseur pf ON f.id = pf.id_fournisseur WHERE pf.id_produit = ${id};`,
     );
-
-    console.log(product);
 
     if (product.length === 0) {
       res.status(404).json({ message: "Product not found" });
