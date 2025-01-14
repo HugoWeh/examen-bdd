@@ -5,6 +5,6 @@ const dbConfig = {
   database: process.env.DB_NAME,
   port: process.env.DB_PORT,
   multipleStatements: true,
-};
+}
 
-export default dbConfig;
+export default dbConfig
