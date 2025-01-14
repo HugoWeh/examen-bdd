@@ -1,17 +1,14 @@
-import mysql from "mysql2/promise"
-import dbConfig from "@/lib/db"
+import knexInstance from "@/lib/db"
 
 const handler = async (req, res) => {
   if (req.method === "GET") {
-    const connection = await mysql.createConnection(dbConfig)
-
-    const [orders] = await connection.execute(
-      `SELECT DISTINCT cl.* from clients cl join commandes co on co.id_client = cl.id;`
-    )
+    const orders = await knexInstance("clients")
+      .distinct("clients.*")
+      .join("commandes", "commandes.id_client", "clients.id")
 
     res.status(200).json(orders)
 
-    await connection.end()
+    return
   }
 }
 
