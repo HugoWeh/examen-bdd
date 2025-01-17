@@ -1,5 +1,5 @@
 import { Model } from "objection"
-import Lines_Command from "@/db/models/Lines_Command"
+import Supplier from "@/db/models/Supplier"
 
 class Product extends Model {
   static get tableName() {
@@ -29,12 +29,16 @@ class Product extends Model {
 
   static get relationMappings() {
     return {
-      lines_command: {
-        relation: Model.HasManyRelation,
-        modelClass: Lines_Command,
+      suppliers: {
+        relation: Model.HasOneThroughRelation,
+        modelClass: Supplier,
         join: {
           from: "produits.id",
-          to: "lignes_commande.id_produit",
+          through: {
+            from: "produit_fournisseur.id_produit",
+            to: "produit_fournisseur.id_fournisseur",
+          },
+          to: "fournisseurs.id",
         },
       },
     }
