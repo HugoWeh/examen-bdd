@@ -67,7 +67,8 @@ Avant de commencer, assurez-vous d'avoir installé les éléments suivants :
   CREATE TABLE IF NOT EXISTS Fournisseurs (
       id INT AUTO_INCREMENT PRIMARY KEY,
       nom VARCHAR(100) NOT NULL,
-      adresse TEXT NOT NULL
+      adresse TEXT NOT NULL,
+      telephone VARCHAR(50)
   );
 
   CREATE TABLE IF NOT EXISTS Lignes_Commande (
@@ -170,36 +171,39 @@ Avant de commencer, assurez-vous d'avoir installé les éléments suivants :
   (28, '2025-01-28'),
   (29, '2025-01-29');
 
-  INSERT INTO Fournisseurs (nom, adresse) VALUES
-  ('FournituresTech', '5 Rue de la Technologie, Paris'),
-  ('TechSupply', '12 Boulevard de la Nouvelle-Technologie, Lyon'),
-  ('BureauPlus', '9 Rue des Entreprises, Marseille'),
-  ('ElectroPro', '15 Avenue des Services, Bordeaux'),
-  ('GadgetExpress', '24 Rue de l’Innovation, Toulouse'),
-  ('MobilierSolutions', '30 Rue des Commerces, Nantes'),
-  ('PCWorld', '50 Avenue du Hardware, Paris'),
-  ('AudioMarket', '33 Rue du Son, Lyon'),
-  ('ProElectronics', '18 Rue des Gadgets, Marseille'),
-  ('EcomTech', '11 Rue de l’Équipement, Bordeaux'),
-  ('SystèmeTech', '7 Rue du Digital, Paris'),
-  ('Innova', '21 Avenue des Futurs, Lyon'),
-  ('TechIn', '4 Rue de la Connectivité, Toulouse'),
-  ('ElectroStore', '27 Boulevard des Idées, Nantes'),
-  ('FutureTech', '6 Rue des Innovations, Bordeaux'),
-  ('CyberWorld', '28 Avenue de la Technologie, Marseille'),
-  ('CompletInformatique', '35 Rue de la Numérique, Paris'),
-  ('BureauEquip', '19 Rue du Bureau, Lyon'),
-  ('DisqueStore', '22 Rue des Disques, Toulouse'),
-  ('FixTech', '13 Rue de la Réparation, Paris'),
-  ('MécaniqueTech', '26 Avenue du Mécanique, Lyon'),
-  ('FlashSupply', '3 Rue du Flash, Bordeaux'),
-  ('GlobalTech', '8 Rue de la Robotique, Paris'),
-  ('ProFuture', '20 Avenue des Équipements, Marseille'),
-  ('AutoTech', '17 Rue de l’Automatisation, Lyon'),
-  ('PixelTech', '29 Rue des Pixels, Toulouse'),
-  ('TechnoExpert', '25 Rue de l’Expertise, Nantes'),
-  ('NextInformatique', '2 Rue de la Connectivité, Paris'),
-  ('BureauXpert', '14 Avenue du Bureau, Lyon');
+  ALTER TABLE Fournisseurs ADD COLUMN téléphone VARCHAR(15);
+
+  INSERT INTO Fournisseurs (nom, adresse, telephone) VALUES
+  ('FournituresTech', '5 Rue de la Technologie, Paris', '01 23 45 67 89'),
+  ('TechSupply', '12 Boulevard de la Nouvelle-Technologie, Lyon', '04 12 34 56 78'),
+  ('BureauPlus', '9 Rue des Entreprises, Marseille', '04 91 23 45 67'),
+  ('ElectroPro', '15 Avenue des Services, Bordeaux', '05 56 78 90 12'),
+  ('GadgetExpress', '24 Rue de l’Innovation, Toulouse', '05 61 23 45 67'),
+  ('MobilierSolutions', '30 Rue des Commerces, Nantes', '02 40 56 78 90'),
+  ('PCWorld', '50 Avenue du Hardware, Paris', '01 48 56 78 90'),
+  ('AudioMarket', '33 Rue du Son, Lyon', '04 78 56 34 12'),
+  ('ProElectronics', '18 Rue des Gadgets, Marseille', '04 91 67 89 01'),
+  ('EcomTech', '11 Rue de l’Équipement, Bordeaux', '05 56 12 34 56'),
+  ('SystèmeTech', '7 Rue du Digital, Paris', '01 49 23 45 67'),
+  ('Innova', '21 Avenue des Futurs, Lyon', '04 72 23 45 67'),
+  ('TechIn', '4 Rue de la Connectivité, Toulouse', '05 61 45 67 89'),
+  ('ElectroStore', '27 Boulevard des Idées, Nantes', '02 40 67 89 01'),
+  ('FutureTech', '6 Rue des Innovations, Bordeaux', '05 56 78 90 34'),
+  ('CyberWorld', '28 Avenue de la Technologie, Marseille', '04 91 56 78 90'),
+  ('CompletInformatique', '35 Rue de la Numérique, Paris', '01 47 23 45 78'),
+  ('BureauEquip', '19 Rue du Bureau, Lyon', '04 78 34 56 90'),
+  ('DisqueStore', '22 Rue des Disques, Toulouse', '05 61 34 56 78'),
+  ('FixTech', '13 Rue de la Réparation, Paris', '01 42 56 78 12'),
+  ('MécaniqueTech', '26 Avenue du Mécanique, Lyon', '04 72 56 78 90'),
+  ('FlashSupply', '3 Rue du Flash, Bordeaux', '05 56 12 34 78'),
+  ('GlobalTech', '8 Rue de la Robotique, Paris', '01 47 89 01 23'),
+  ('ProFuture', '20 Avenue des Équipements, Marseille', '04 91 45 67 89'),
+  ('AutoTech', '17 Rue de l’Automatisation, Lyon', '04 72 34 56 12'),
+  ('PixelTech', '29 Rue des Pixels, Toulouse', '05 61 23 45 01'),
+  ('TechnoExpert', '25 Rue de l’Expertise, Nantes', '02 40 34 56 78'),
+  ('NextInformatique', '2 Rue de la Connectivité, Paris', '01 48 67 89 01'),
+  ('BureauXpert', '14 Avenue du Bureau, Lyon', '04 78 56 34 12');
+
 
   INSERT INTO Lignes_Commande (id_commande, id_produit, quantite) VALUES
   (1, 1, 2),
