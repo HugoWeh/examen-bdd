@@ -32,7 +32,7 @@ Avant de commencer, assurez-vous d'avoir installé les éléments suivants :
 
 3. **Migrations**
 
-  Pour la V2, utiliser les migrations de Knex.js (garder la bdd examen)
+  Pour la V2, utiliser les migrations de Knex.js (garder la bdd examen ou supprimer les tables pour les créer avec la migration, ensuite réinsérer les données dans MySQL Workbench via les INSERT de la V1)
   
   ```bash
   npx knex migrate:latest
