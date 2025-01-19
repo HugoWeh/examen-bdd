@@ -14,6 +14,19 @@ const handler = async (req, res) => {
 
     return
   }
+
+  if (req.method === "POST") {
+    const { supplierId, id } = req.query
+
+    await knexInstance("produit_fournisseur").insert({
+      id_produit: id,
+      id_fournisseur: supplierId,
+    })
+
+    res.status(200).json({ message: "Product added to supplier" })
+
+    return
+  }
 }
 
 export default handler
