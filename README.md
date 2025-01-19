@@ -1,55 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Projet Next.js
 
-## Getting Started
+Ce projet utilise [Next.js](https://nextjs.org/), un framework React pour créer des applications web modernes. Ce README vous guidera à travers les étapes nécessaires pour initialiser le projet après avoir cloné le dépôt.
 
-First, run the development server:
+## Prérequis
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Avant de commencer, assurez-vous d'avoir installé les éléments suivants :
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- [Node.js](https://nodejs.org/) (version 12.0 ou supérieure)
+- [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Étapes pour démarrer
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+1. **Clonez le dépôt :**
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+  Clonez le dépôt dans votre répertoire local :
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+  ```bash
+  git clone https://github.com/HugoWeh/examen-bdd.git
+  cd votre-repository
+  npm install
 
-## Learn More
+2. **.env.local**
 
-To learn more about Next.js, take a look at the following resources:
+  Créer un fichier .env.local à la racine du projet avec: 
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+  DB_HOST="localhost"
+  DB_USER="root"
+  DB_PASSWORD=your_password
+  DB_NAME="examen"
+  DB_PORT="3306"
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. **Migrations**
 
-## Deploy on Vercel
+  Pour la V2, utiliser les migrations de Knex.js
+  
+  ```bash
+  npx knex migrate:latest
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
-
-V1 :
-
-Documentation de l’api
-Commandes :
-
-/api/command/add
-
-Body 
-{
-	« clientId » : « 5 »  ,
-	« date » : « 2025 -01-02 »
-}
-
-Response
+  
