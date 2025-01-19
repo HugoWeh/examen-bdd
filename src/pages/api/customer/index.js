@@ -2,6 +2,20 @@ import mysql from "mysql2/promise"
 import dbConfig from "@/lib/db"
 
 const handler = async (req, res) => {
+  if (req.method === "GET") {
+    const connection = await mysql.createConnection(dbConfig)
+
+    const [orders] = await connection.execute(
+      `SELECT DISTINCT cl.* from clients cl join commandes co on co.id_client = cl.id;`
+    )
+
+    res.status(200).json(orders)
+
+    await connection.end()
+
+    return
+  }
+
   if (req.method === "POST") {
     const connection = await mysql.createConnection(dbConfig)
 
@@ -13,6 +27,23 @@ const handler = async (req, res) => {
     )
 
     res.status(200).json({ message: "Client added" })
+
+    await connection.end()
+
+    return
+  }
+
+  if (req.method === "PUT") {
+    const connection = await mysql.createConnection(dbConfig)
+
+    const { id, lastName, firstName, address, phone } = req.body
+
+    await connection.execute(
+      `UPDATE clients SET nom = ?, prenom = ?, adresse = ?, telephone = ? WHERE id = ?;`,
+      [lastName, firstName, address, phone, id]
+    )
+
+    res.status(200).json({ message: "Client updated" })
 
     await connection.end()
 

@@ -34,6 +34,23 @@ const handler = async (req, res) => {
     return
   }
 
+  if (req.method === "PUT") {
+    const connection = await mysql.createConnection(dbConfig)
+
+    const { id, clientId, date } = req.body
+
+    await connection.execute(
+      `UPDATE commandes SET id_client = ?, date = ? WHERE id = ?;`,
+      [clientId, date, id]
+    )
+
+    res.status(200).json({ message: "Command updated" })
+
+    await connection.end()
+
+    return
+  }
+
   if (req.method === "DELETE") {
     const { id } = req.query
 

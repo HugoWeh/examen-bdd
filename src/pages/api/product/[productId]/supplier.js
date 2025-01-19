@@ -3,12 +3,12 @@ import dbConfig from "@/lib/db"
 
 const handler = async (req, res) => {
   if (req.method === "GET") {
-    const { id } = req.query
+    const { productId } = req.query
 
     const connection = await mysql.createConnection(dbConfig)
 
     const [product] = await connection.query(
-      `SELECT f.* FROM Fournisseurs f JOIN Produit_Fournisseur pf ON f.id = pf.id_fournisseur WHERE pf.id_produit = ${id};`
+      `SELECT f.* FROM Fournisseurs f JOIN Produit_Fournisseur pf ON f.id = pf.id_fournisseur WHERE pf.id_produit = ${productId};`
     )
 
     if (product.length === 0) {

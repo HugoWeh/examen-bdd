@@ -12,6 +12,8 @@ const handler = async (req, res) => {
     res.status(200).json(fournisseurs)
 
     await connection.end()
+
+    return
   }
 
   if (req.method === "POST") {
@@ -27,18 +29,43 @@ const handler = async (req, res) => {
     res.status(200).json({ message: "Supplier added" })
 
     await connection.end()
+
+    return
+  }
+
+  if (req.method === "PUT") {
+    const connection = await mysql.createConnection(dbConfig)
+
+    const { id, name, address } = req.body
+
+    await connection.execute(
+      `UPDATE fournisseurs SET nom = ?, adresse = ? WHERE id = ?;`,
+      [name, address, id]
+    )
+
+    res.status(200).json({ message: "Supplier updated" })
+
+    await connection.end()
+
+    return
   }
 
   if (req.method === "DELETE") {
     const connection = await mysql.createConnection(dbConfig)
 
-    const { id } = req.body
+    const { id } = req.query
 
+    await connection.execute(
+      `DElETE FROM produit_fournisseur WHERE id_fournisseur = ?`,
+      [id]
+      )
     await connection.execute(`DELETE FROM fournisseurs WHERE id = ?`, [id])
 
     res.status(200).json({ message: "Supplier deleted" })
 
     await connection.end()
+
+    return
   }
 }
 
