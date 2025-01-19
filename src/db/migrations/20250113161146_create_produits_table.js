@@ -8,8 +8,9 @@ export const up = async (knex) =>
     table.string("nom")
     table.string("description")
     table.string("categorie")
-    table.integer("quantite")
     table.decimal("prix_unitaire")
+    table.integer("quantite")
+    table.integer("total_ventes")
   })
 
 /**

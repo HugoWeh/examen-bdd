@@ -30,6 +30,43 @@ const handler = async (req, res) => {
 
     return
   }
+
+  if (req.method === "PUT") {
+    const { id, nom, description, prix, quantite } = req.body
+
+    if (!id || !nom || !description || !prix || !quantite) {
+      res.status(400).json({ message: "Missing required fields" })
+
+      return
+    }
+
+    await Product.query(knexInstance).findById(id).patch({
+      nom,
+      description,
+      prix,
+      quantite,
+    })
+
+    res.status(200).json({ message: "Product updated" })
+
+    return
+  }
+
+  if (req.method === "DELETE") {
+    const { id } = req.body
+
+    if (!id) {
+      res.status(400).json({ message: "Missing required fields" })
+
+      return
+    }
+
+    await Product.query(knexInstance).deleteById(id)
+
+    res.status(200).json({ message: "Product deleted" })
+
+    return
+  }
 }
 
 export default handler

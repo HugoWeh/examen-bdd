@@ -3,16 +3,7 @@ import Command from "@/db/models/Command"
 
 const handler = async (req, res) => {
   if (req.method === "GET") {
-    const commands = await Command.query(knexInstance)
-      .select(
-        "commandes.id_client",
-        "commandes.id",
-        "commandes.date",
-        "lignes_commande.id_commande",
-        "lignes_commande.id_produit",
-        "lignes_commande.quantite"
-      )
-      .join("lignes_commande", "commandes.id", "lignes_commande.id_commande")
+    const commands = await Command.query(knexInstance).select("*")
 
     res.status(200).json(commands)
 
@@ -22,12 +13,39 @@ const handler = async (req, res) => {
   if (req.method === "POST") {
     const { clientId } = req.body
 
-    await Command.query(knexInstance).insert({
+    try {
+      const command = await Command.query(knexInstance).insert({
+        id_client: clientId,
+      })
+
+      res.status(201).json({ message: "Command created", command })
+
+      return
+    } catch (error) {
+      res.status(400).json({ message: "Error creating command" })
+
+      return
+    }
+  }
+
+  if (req.method === "PUT") {
+    const { id, clientId } = req.body
+
+    await Command.query(knexInstance).findById(id).patch({
       id_client: clientId,
-      date: new Date(),
     })
 
-    res.status(200).json({ message: "Command added" })
+    res.status(200).json({ message: "Command updated" })
+
+    return
+  }
+
+  if (req.method === "DELETE") {
+    const { id } = req.body
+
+    await Command.query(knexInstance).delete().where("id", id)
+
+    res.status(200).json({ message: "Command deleted" })
 
     return
   }

@@ -9,20 +9,14 @@ class Product extends Model {
   static get jsonSchema() {
     return {
       type: "object",
-      required: [
-        "nom",
-        "description",
-        "categorie",
-        "quantite",
-        "prix_unitaire",
-      ],
       properties: {
         id: { type: "integer" },
         nom: { type: "string", minLength: 1, maxLength: 255 },
         description: { type: "string", minLength: 1, maxLength: 255 },
         categorie: { type: "string", minLength: 1, maxLength: 255 },
+        prix_unitaire: { type: "number" },
         quantite: { type: "integer" },
-        prix_unitaire: { type: "decimal" },
+        total_ventes: { type: "integer" },
       },
     }
   }

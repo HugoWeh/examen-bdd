@@ -10,11 +10,11 @@ class Command extends Model {
   static get jsonSchema() {
     return {
       type: "object",
-      required: ["id_client", "date"],
+      required: ["id_client"],
       properties: {
         id: { type: "integer" },
         id_client: { type: "integer" },
-        date: { type: "string", format: "date" },
+        date: { type: "string", format: "date-time" },
       },
     }
   }
