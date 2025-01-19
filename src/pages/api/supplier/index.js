@@ -46,6 +46,9 @@ const handler = async (req, res) => {
   if (req.method === "DELETE") {
     const { id } = req.body
 
+    await knexInstance("produit_fournisseur")
+      .delete()
+      .where("id_fournisseur", id)
     await Supplier.query(knexInstance).delete().where("id", id)
 
     res.status(200).json({ message: "Supplier deleted" })

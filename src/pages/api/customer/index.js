@@ -1,5 +1,7 @@
 import knexInstance from "@/lib/db"
 import Customer from "@/db/models/Customer"
+import Command from "@/db/models/Command"
+import Lines_Command from "@/db/models/Lines_Command"
 
 const handler = async (req, res) => {
   if (req.method === "GET") {
@@ -36,16 +38,6 @@ const handler = async (req, res) => {
     })
 
     res.status(200).json({ message: "Customer updated" })
-
-    return
-  }
-
-  if (req.method === "DELETE") {
-    const { id } = req.body
-
-    await Customer.query(knexInstance).delete().where("id", id)
-
-    res.status(200).json({ message: "Customer deleted" })
 
     return
   }

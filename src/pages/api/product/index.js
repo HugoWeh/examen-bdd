@@ -1,5 +1,6 @@
 import knexInstance from "@/lib/db"
 import Product from "@/db/models/Product"
+import Lines_Command from "@/db/models/Lines_Command"
 
 const handler = async (req, res) => {
   if (req.method === "GET") {
@@ -61,7 +62,9 @@ const handler = async (req, res) => {
       return
     }
 
-    await Product.query(knexInstance).deleteById(id)
+    await Lines_Command.query(knexInstance).delete().where("id_produit", id)
+    await knexInstance("produit_fournisseur").delete().where("id_produit", id)
+    await Product.query(knexInstance).delete().where("id", id)
 
     res.status(200).json({ message: "Product deleted" })
 
