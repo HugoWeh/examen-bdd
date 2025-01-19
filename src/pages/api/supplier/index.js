@@ -19,11 +19,11 @@ const handler = async (req, res) => {
   if (req.method === "POST") {
     const connection = await mysql.createConnection(dbConfig)
 
-    const { name, address } = req.body
+    const { name, address, telephone } = req.body
 
     await connection.execute(
-      `INSERT INTO fournisseurs (nom, adresse) VALUES (?, ?);`,
-      [name, address]
+      `INSERT INTO fournisseurs (nom, adresse, telephone) VALUES (?, ?, ?);`,
+      [name, address, telephone]
     )
 
     res.status(200).json({ message: "Supplier added" })
@@ -36,11 +36,11 @@ const handler = async (req, res) => {
   if (req.method === "PUT") {
     const connection = await mysql.createConnection(dbConfig)
 
-    const { id, name, address } = req.body
+    const { id, name, address, telephone } = req.body
 
     await connection.execute(
-      `UPDATE fournisseurs SET nom = ?, adresse = ? WHERE id = ?;`,
-      [name, address, id]
+      `UPDATE fournisseurs SET nom = ?, adresse = ?, telephone = ? WHERE id = ?;`,
+      [name, address, telephone, id]
     )
 
     res.status(200).json({ message: "Supplier updated" })
@@ -58,7 +58,7 @@ const handler = async (req, res) => {
     await connection.execute(
       `DElETE FROM produit_fournisseur WHERE id_fournisseur = ?`,
       [id]
-      )
+    )
     await connection.execute(`DELETE FROM fournisseurs WHERE id = ?`, [id])
 
     res.status(200).json({ message: "Supplier deleted" })

@@ -5,9 +5,7 @@ const handler = async (req, res) => {
   if (req.method === "GET") {
     const connection = await mysql.createConnection(dbConfig)
 
-    const [orders] = await connection.execute(
-      `SELECT DISTINCT cl.* from clients cl join commandes co on co.id_client = cl.id;`
-    )
+    const [orders] = await connection.execute("SELECT DISTINCT * from clients;")
 
     res.status(200).json(orders)
 

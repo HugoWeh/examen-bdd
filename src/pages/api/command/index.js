@@ -20,7 +20,8 @@ const handler = async (req, res) => {
   if (req.method === "POST") {
     const connection = await mysql.createConnection(dbConfig)
 
-    const { clientId, date } = req.body
+    const { clientId } = req.body
+    const date = new Date()
 
     await connection.execute(
       `INSERT INTO commandes (id_client, date) VALUES (?, ?);`,
