@@ -1,21 +1,22 @@
-import mysql from "mysql2/promise"
-import dbConfig from "@/lib/db"
+import knexInstance from "@/lib/db"
+import Product from "@/db/models/Product"
 
 const handler = async (req, res) => {
-  if (req.method === "GET") {
-    const connection = await mysql.createConnection(dbConfig)
+  if (req.method !== "GET") {
+    res.status(405).json({ message: "Method not allowed" })
 
-    const { name } = req.query
-
-    const [categories] = await connection.execute(
-      "select * from produits where categorie = ?;",
-      [name]
-    )
-
-    res.status(200).json(categories)
-
-    await connection.end()
+    return
   }
+
+  const { name } = req.query
+
+  const products = await Product.query(knexInstance)
+    .select("*")
+    .where("produits.nom", "like", `%${name}%`)
+
+  res.status(200).json(products)
+
+  return
 }
 
 export default handler

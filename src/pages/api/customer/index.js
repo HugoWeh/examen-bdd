@@ -9,18 +9,21 @@ const handler = async (req, res) => {
 
     return
   }
-  // if (req.method === "POST") {
-  //   const { lastName, firstName, address, phone } = req.body
 
-  //   await connection.execute(
-  //     `INSERT INTO clients (nom, prenom, adresse, telephone) VALUES (?, ?, ?, ?);`,
-  //     [lastName, firstName, address, phone]
-  //   )
+  if (req.method === "POST") {
+    const { lastName, firstName, address, phone } = req.body
 
-  //   res.status(200).json({ message: "Client added" })
+    await Customer.query(knexInstance).insert({
+      nom: lastName,
+      prenom: firstName,
+      adresse: address,
+      telephone: phone,
+    })
 
-  //   await connection.end()
-  // }
+    res.status(200).json({ message: "Customer added" })
+
+    return
+  }
 }
 
 export default handler
