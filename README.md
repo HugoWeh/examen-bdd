@@ -36,6 +36,8 @@ Avant de commencer, assurez-vous d'avoir installé les éléments suivants :
   ```SQL
   CREATE DATABASE examen;
 
+  USE examen;
+
   CREATE TABLE IF NOT EXISTS Produits (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(100) NOT NULL,
