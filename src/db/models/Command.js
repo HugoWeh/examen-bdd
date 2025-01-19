@@ -14,7 +14,7 @@ class Command extends Model {
       properties: {
         id: { type: "integer" },
         id_client: { type: "integer" },
-        date: { type: "string", format: "date-time" },
+        date: { type: "string" },
       },
     }
   }

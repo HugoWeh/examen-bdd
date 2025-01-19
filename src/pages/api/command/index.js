@@ -11,11 +11,12 @@ const handler = async (req, res) => {
   }
 
   if (req.method === "POST") {
-    const { clientId } = req.body
+    const { clientId, date } = req.body
 
     try {
       const command = await Command.query(knexInstance).insert({
         id_client: clientId,
+        date: date,
       })
 
       res.status(201).json({ message: "Command created", command })
