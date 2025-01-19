@@ -32,7 +32,7 @@ Avant de commencer, assurez-vous d'avoir installé les éléments suivants :
 
 3. **Migrations**
 
-  Pour la V2, utiliser les migrations de Knex.js
+  Pour la V2, utiliser les migrations de Knex.js (garder la bdd examen)
   
   ```bash
   npx knex migrate:latest

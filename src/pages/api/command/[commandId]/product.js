@@ -14,7 +14,7 @@ const handler = async (req, res) => {
 
     const commandProducts = await Product.query(knexInstance)
       .select("produits.*", "lignes_commande.quantite")
-      .join("lignes_commande", "id", "lignes_commande.id_produit")
+      .join("lignes_commande", "produits.id", "lignes_commande.id_produit")
       .where("lignes_commande.id_commande", commandId)
 
     res.status(200).json(commandProducts)
