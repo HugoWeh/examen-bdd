@@ -18,6 +18,7 @@ Avant de commencer, assurez-vous d'avoir installé les éléments suivants :
   ```bash
   git clone https://github.com/HugoWeh/examen-bdd.git
   cd votre-repository
+  npm install
 
 2. **.env.local**
 
